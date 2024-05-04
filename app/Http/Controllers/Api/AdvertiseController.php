@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Advertise;
 use Illuminate\Http\Request;
 
 class AdvertiseController extends Controller
@@ -12,7 +13,12 @@ class AdvertiseController extends Controller
      */
     public function index()
     {
-        //
+        $data = Advertise::all();
+        return response()->json([
+            'status' => true,
+            'message' => 'success',
+            'data' => $data
+        ]);
     }
 
     /**
@@ -28,7 +34,19 @@ class AdvertiseController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Advertise::find($id);
+        if($data){
+            return response()->json([
+                'status' => true,
+                'message' => 'success',
+                'data' => $data
+            ]);
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => 'data not found'
+            ]);
+        }
     }
 
     /**
